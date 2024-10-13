@@ -1,11 +1,6 @@
-<a href="https://exyte.com/"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/exyte/media/master/common/header-dark.png"><img src="https://raw.githubusercontent.com/exyte/media/master/common/header-light.png"></picture></a>
-
-<a href="https://exyte.com/"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/exyte/media/master/common/our-site-dark.png" width="80" height="16"><img src="https://raw.githubusercontent.com/exyte/media/master/common/our-site-light.png" width="80" height="16"></picture></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://twitter.com/exyteHQ"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/exyte/media/master/common/twitter-dark.png" width="74" height="16"><img src="https://raw.githubusercontent.com/exyte/media/master/common/twitter-light.png" width="74" height="16">
-</picture></a> <a href="https://exyte.com/contacts"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/exyte/media/master/common/get-in-touch-dark.png" width="128" height="24" align="right"><img src="https://raw.githubusercontent.com/exyte/media/master/common/get-in-touch-light.png" width="128" height="24" align="right"></picture></a>
-
 <p><h1 align="left">SVGView</h1></p>
 
-<p><h4>SVG parser written in SwiftUI</h4></p>
+<p><h4>This is a fork of Exyte's SVG parser written in SwiftUI</h4></p>
 
 [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fexyte%2FSVGView%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/exyte/SVGView)
 [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fexyte%2FSVGView%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/exyte/SVGView)
@@ -16,7 +11,7 @@
 
 # Overview
 
-The goal of this project is to bring the full power of SVG to Apple platforms. Our framework can parse SVG files and represent their content in SwiftUI. It provides you with the ability to not only render SVG files, but also add interactivity to them, handle user input and use SwiftUI to put your art into motion.
+This is a fork of Exyte's SVGViewer repository, which adds properties that make it easier and more powerful to interact with SwiftUI Paths. The original project brings the power of SVG to Apple platforms, by parsing SVG files and representing their content in SwiftUI.
 
 # Usage
 
@@ -29,6 +24,25 @@ struct ContentView: View {
     }
 }
 ```
+
+## Additional properties
+
+This fork in particular adds additional properties to the rendered paths to animate their trim and control the stroke of the path.
+
+```Swift
+struct ContentView: View {
+    var body: some View {
+        let view = SVGView(contentsOf: Bundle.main.url(forResource: "example", withExtension: "svg")!)
+        if let part = view.getNode(byId: id) {
+            part.trimTo = 0  // Set the trimTo to 0, so it can be animated to 1 for a "drawn in" effect
+            part.pathStroke = SVGStroke(fill: SVGColor(uiColor: .label), width: 5, cap: .round) // Set the property of the Path stroke, using uiColor with an SVGColor extension
+        }
+        return view
+    }
+}
+```
+
+
 
 ## Customization
 
